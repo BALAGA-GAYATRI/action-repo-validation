@@ -8,7 +8,7 @@ import { issueTemplateCheck } from './issueTemplateCheck'
 import { standardLabelsCheck } from './standardLabelsCheck'
 import { AnyARecord } from 'dns';
 
-function main() {
+async function main() {
 
 	var secret_token = core.getInput('GITHUB_TOKEN');
 	const octokit = new Octokit({
@@ -34,23 +34,24 @@ function main() {
 		
 		console.log('*******' + repository + '*******');
 		//Check for example and Contribution in README
-		validationResultRepo = Promise.resolve(readmeChecks(repository, validationResultRepo, ownername, secret_token, octokit));
+		validationResultRepo = await readmeChecks(repository, validationResultRepo, ownername, secret_token, octokit);
 		//Check for CODEOWNERS file in .github folder
-		codeOwnerCheck(repository, ownername, secret_token, octokit);
+		await codeOwnerCheck(repository, ownername, secret_token, octokit);
 		//Check if nodemodules folder is present in master branch for typescript action
-		nodeModulesCheck(repository, ownername, secret_token, octokit);
+		await nodeModulesCheck(repository, ownername, secret_token, octokit);
 		//check for branch permissions in main/master and releases/*
-		branchPermissionCheck(repository, ownername, secret_token, octokit);
+		await branchPermissionCheck(repository, ownername, secret_token, octokit);
 		//check for nodemodules folder in releases/*
-		releasesNodeModulesCheck(repository, ownername, secret_token, octokit);
+		await releasesNodeModulesCheck(repository, ownername, secret_token, octokit);
 		//check for security/vulnerability bot
-		vulnerabilityBotCheck(repository, ownername, secret_token, octokit);
+		await vulnerabilityBotCheck(repository, ownername, secret_token, octokit);
 		//1. check whether issue-template has been set up and 2. default label is need-to-triage
-		issueTemplateCheck(repository, ownername, secret_token, octokit);
+		await issueTemplateCheck(repository, ownername, secret_token, octokit);
 		//Check whether standard labels have been set up
-		standardLabelsCheck(repository, ownername, secret_token, octokit)
+		await standardLabelsCheck(repository, ownername, secret_token, octokit)
 		validationResult.push(validationResultRepo);
 	}
+	console
 	console.log(Promise.resolve(validationResult))
 }
 
