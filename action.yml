@@ -15,6 +15,7 @@ inputs:
   repositories:
     description: 'Comma separated names of repositories. For example login,webapps-deploy etc.'
     required: true
+
 runs:
   using: 'node12'
   main: 'lib/main.js'

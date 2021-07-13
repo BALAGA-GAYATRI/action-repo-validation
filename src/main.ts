@@ -51,8 +51,7 @@ async function main() {
 		await standardLabelsCheck(repository, ownername, secret_token, octokit)
 		validationResult.push(validationResultRepo);
 	}
-	console
-	console.log(Promise.resolve(validationResult))
+	console.log(JSON.stringify(validationResult))
 }
 
 main();
