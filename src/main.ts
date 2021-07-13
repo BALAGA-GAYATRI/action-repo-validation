@@ -21,16 +21,26 @@ async function main() {
 	var validationResult = [];
 	for (var i = 0; i < repositories_list.length; i++) {
 		repository = repositories_list[i];
-		var validationResultRepo: any = new Map([["repoName",repository], 
-										["readmeChecks","unknown"] ,
-										["codeOwnerCheck","unknown"], 
-										["nodeModulesCheck","unknown"], 
-										["branchPermissionCheck","unknown"],
-										["releasesNodeModulesCheck","unknown"],
-										["vulnerabilityBotCheck","unknown"],
-										["issueTemplateCheck","unknown"],
-										["standardLabelsCheck","unknown"]
-									]);
+		var validationResultRepo: any = {"repoName":repository, 
+										 "readmeChecks":"unknown", 
+										 "codeOwnerCheck":"unknown", 
+										 "nodeModulesCheck":"unknown", 
+										 "branchPermissionCheck":"unknown",
+										 "releasesNodeModulesCheck":"unknown",
+										 "vulnerabilityBotCheck":"unknown",
+										 "issueTemplateCheck":"unknown",
+										 "standardLabelsCheck":"unknown"
+										}
+									// new Map([["repoName",repository], 
+									// 	["readmeChecks","unknown"] ,
+									// 	["codeOwnerCheck","unknown"], 
+									// 	["nodeModulesCheck","unknown"], 
+									// 	["branchPermissionCheck","unknown"],
+									// 	["releasesNodeModulesCheck","unknown"],
+									// 	["vulnerabilityBotCheck","unknown"],
+									// 	["issueTemplateCheck","unknown"],
+									// 	["standardLabelsCheck","unknown"]
+									// ]);
 		
 		console.log('*******' + repository + '*******');
 		//Check for example and Contribution in README
