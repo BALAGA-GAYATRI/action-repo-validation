@@ -15,7 +15,9 @@ inputs:
   repositories:
     description: 'Comma separated names of repositories. For example login,webapps-deploy etc.'
     required: true
-
+outputs:
+  validationResult: 
+    description: 'Validation result dictionary after applying the checks'
 runs:
   using: 'node12'
   main: 'lib/main.js'

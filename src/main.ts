@@ -62,6 +62,8 @@ async function main() {
 		validationResult.push(validationResultRepo);
 	}
 	console.log(JSON.parse(JSON.stringify(validationResult)))
+	core.setOutput("validationResult", JSON.parse(JSON.stringify(validationResult)));
+
 }
 
 main();
