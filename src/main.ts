@@ -51,7 +51,7 @@ function main() {
 		standardLabelsCheck(repository, ownername, secret_token, octokit)
 		validationResult.push(validationResultRepo);
 	}
-	console.log(validationResult)
+	console.log(Promise.resolve(validationResult))
 }
 
 main();
