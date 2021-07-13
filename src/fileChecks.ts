@@ -32,16 +32,17 @@ export async function readmeChecks(repository: string, validationResultRepo: any
 			else {
 				core.setFailed('Please add Contribution Guidelines in README');
 			}
-			await validationResultRepo.set('readmeChecks','Yes');
+			// await validationResultRepo.set('readmeChecks','Yes');
+			validationResultRepo['readmeChecks'] = 'Yes';
 		}
 		else {
 			core.setFailed('Please add README file')
-			await validationResultRepo.set('readmeChecks','No');
+			validationResultRepo['readmeChecks'] = 'No';
 		}
 	}
 	catch (err) {
 		core.setFailed('Please add README file')
-		await validationResultRepo.set('readmeChecks','No');
+		validationResultRepo['readmeChecks'] = 'No';
 	}
 	return Promise.resolve(validationResultRepo)
 
