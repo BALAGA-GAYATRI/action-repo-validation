@@ -62,7 +62,7 @@ async function main() {
 		validationResult.push(validationResultRepo);
 	}
 	console.log(JSON.parse(JSON.stringify(validationResult)));
-	var result = JSON.stringify(validationResult, null,'\t');
+	var result = JSON.stringify(validationResult, null,'\t').replace(/\\"/g, '"');
 	core.setOutput("validationResult", result);
 
 }
