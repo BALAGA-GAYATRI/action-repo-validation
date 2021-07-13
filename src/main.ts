@@ -7,7 +7,7 @@ import { vulnerabilityBotCheck } from './vulnerabilityBotCheck'
 import { issueTemplateCheck } from './issueTemplateCheck'
 import { standardLabelsCheck } from './standardLabelsCheck'
 
-async function main() {
+function main() {
 
 	var secret_token = core.getInput('GITHUB_TOKEN');
 	const octokit = new Octokit({
