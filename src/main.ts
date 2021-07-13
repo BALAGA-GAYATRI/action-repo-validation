@@ -6,6 +6,7 @@ import { branchPermissionCheck } from './branchPermissionCheck'
 import { vulnerabilityBotCheck } from './vulnerabilityBotCheck'
 import { issueTemplateCheck } from './issueTemplateCheck'
 import { standardLabelsCheck } from './standardLabelsCheck'
+import { AnyARecord } from 'dns';
 
 function main() {
 
@@ -20,20 +21,20 @@ function main() {
 	var validationResult = [];
 	for (var i = 0; i < repositories_list.length; i++) {
 		repository = repositories_list[i];
-		var validationResultRepo:any= {"repoName":repository, 
-								   "readmeChecks":"unknown" ,
-								   "codeOwnerCheck":"unknown", 
-								   "nodeModulesCheck":"unknown", 
-								   "branchPermissionCheck":"unknown",
-								   "releasesNodeModulesCheck":"unknown",
-								   "vulnerabilityBotCheck":"unknown",
-								   "issueTemplateCheck":"unknown",
-								   "standardLabelsCheck":"unknown"
-								  };
+		var validationResultRepo: any = new Map([["repoName",repository], 
+										["readmeChecks","unknown"] ,
+										["codeOwnerCheck","unknown"], 
+										["nodeModulesCheck","unknown"], 
+										["branchPermissionCheck","unknown"],
+										["releasesNodeModulesCheck","unknown"],
+										["vulnerabilityBotCheck","unknown"],
+										["issueTemplateCheck","unknown"],
+										["standardLabelsCheck","unknown"]
+									]);
 		
 		console.log('*******' + repository + '*******');
 		//Check for example and Contribution in README
-		validationResultRepo = readmeChecks(repository, validationResultRepo, ownername, secret_token, octokit);
+		validationResultRepo = Promise.resolve(readmeChecks(repository, validationResultRepo, ownername, secret_token, octokit));
 		//Check for CODEOWNERS file in .github folder
 		codeOwnerCheck(repository, ownername, secret_token, octokit);
 		//Check if nodemodules folder is present in master branch for typescript action
