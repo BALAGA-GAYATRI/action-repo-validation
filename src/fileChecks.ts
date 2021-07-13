@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import { Octokit } from '@octokit/core';
 
-export async function readmeChecks(repository: string, ownername: string, secret_token: string, octokit: Octokit) {
+export async function readmeChecks(repository: string, validationResultRepo:any,  ownername: string, secret_token: string, octokit: Octokit) {
 	try {
 		const result = await octokit.request('GET /repos/{owner}/{repo}/readme', {
 			repo: repository,
@@ -32,14 +32,18 @@ export async function readmeChecks(repository: string, ownername: string, secret
 			else {
 				core.setFailed('Please add Contribution Guidelines in README');
 			}
+			validationResultRepo.readmeChecks= 'Yes';
 		}
 		else {
 			core.setFailed('Please add README file')
+			validationResultRepo.readmeChecks= 'No';
 		}
 	}
 	catch (err) {
 		core.setFailed('Please add README file')
+		validationResultRepo.readmeChecks= 'No';
 	}
+	return validationResultRepo
 
 }
 
